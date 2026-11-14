@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce | Shop</title>
+    <meta
+      name="description"
+      content="Modern e-commerce storefront with product filters, cart persistence, and checkout validation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-icon">L</div>
+          <div>
+            <p class="eyebrow">Curated essentials</p>
+            <h1>E-Commerce</h1>
+          </div>
+        </div>
+
+        <button id="cartToggle" class="cart-button" aria-label="Open cart">
+          <span>Cart</span>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </header>
+
+      <main class="content">
+        <section class="toolbar">
+          <label class="search-box" aria-label="Search products">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M10.5 3a7.5 7.5 0 015.94 12.56l4.57 4.57 1.41-1.41-4.57-4.57A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"
+              />
+            </svg>
+            <input id="searchInput" type="search" placeholder="Search products, categories, styles..." />
+          </label>
+
+          <div class="toolbar-right">
+            <div class="sort-wrap">
+              <label for="sortSelect">Sort by</label>
+              <select id="sortSelect">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <div id="categoryFilterBar" class="category-filter-bar" aria-label="Filter by category"></div>
+
+        <section class="products-panel">
+          <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping cart">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">Your basket</p>
+          <h2>Cart summary</h2>
+        </div>
+        <button id="closeCart" class="icon-button" aria-label="Close cart">×</button>
+      </div>
+
+      <div id="cartItems" class="cart-items" aria-live="polite"></div>
+
+      <div class="drawer-footer">
+        <div class="total-row">
+          <span>Total</span>
+          <strong id="cartTotal">$0.00</strong>
+        </div>
+        <button id="checkoutBtn" class="primary-button checkout-button" type="button">
+          Continue to checkout
+        </button>
+      </div>
+    </aside>
+
+    <div id="checkoutModal" class="checkout-modal hidden" aria-hidden="true">
+      <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Secure checkout</p>
+            <h2 id="checkoutTitle">Complete your order</h2>
+          </div>
+          <button id="closeCheckout" class="icon-button" aria-label="Close checkout">×</button>
+        </div>
+
+        <p class="checkout-note">No payment details are collected in this demo.</p>
+
+        <form id="checkoutForm" novalidate>
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" required minlength="2" />
+            </div>
+
+            <div class="field-group">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div class="field-group field-full">
+              <label for="address">Shipping address</label>
+              <input id="address" name="address" type="text" required minlength="10" />
+            </div>
+
+            <div class="field-group">
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" required minlength="2" />
+            </div>
+
+            <div class="field-group">
+              <label for="postalCode">Postal code</label>
+              <input id="postalCode" name="postalCode" type="text" required pattern="[A-Za-z0-9\s-]{4,10}" />
+            </div>
+          </div>
+
+          <div id="formMessage" class="form-message" role="alert" aria-live="assertive"></div>
+
+          <button class="primary-button submit-button" type="submit">Place order</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
